@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,7 +17,9 @@ namespace ProgrammazioneAsincrona
     /// </summary>
     public partial class MainWindow : Window
     {
-        string frase;
+        int contatoreLettere = 0;
+        int lunghezza = 5;
+        string frase = "";
         string lettera = "";
         Random rnd = new Random();
         char[] lettere = new char[26] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
@@ -24,6 +27,7 @@ namespace ProgrammazioneAsincrona
         {
             InitializeComponent();
             Rolling();
+            txtLunghezza.Text = "5";
         }
         private async Task Rolling()
         {
@@ -36,11 +40,33 @@ namespace ProgrammazioneAsincrona
             }
         }
 
-        private void btnStampa_Click(object sender, RoutedEventArgs e)
+        private async void btnStampa_Click(object sender, RoutedEventArgs e)
         {
-            frase = frase + lettera;
+            if (!int.TryParse(txtLunghezza.Text, out int lungo) || lungo <= 0)
+            {
+                txtLunghezza.BorderThickness = new Thickness(3);
+                txtLunghezza.BorderBrush = Brushes.Red; 
+                MessageBox.Show("Inserisci un numero valido. Impostata lunghezza a 5");
+                lunghezza = 5;
+                txtLunghezza.Text = "5";
+                txtLunghezza.BorderThickness = new Thickness(1);
+                txtLunghezza.BorderBrush = Brushes.Gray;
+            }
+            else
+            {
+                lunghezza = lungo;
+                if (contatoreLettere < lunghezza)
+                {
+                    frase = frase + lettera;
+                    contatoreLettere++;
+                }
+                else
+                {
+                    frase = frase + "\n" + lettera; // Aggiunge a capo E la lettera corrente
+                    contatoreLettere = 1; // Reset a 1 perché la prima lettera della nuova riga c'è già
+                }
+            }
             txtbStampa.Text = frase;
         }
-
     }
 }

@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="350">
     <Grid>
-        <Button x:Name="btnStampa" Content="Stampa" HorizontalAlignment="Left" Margin="120,25,0,0" VerticalAlignment="Top" Width="74" Click="btnStampa_Click"/>
+        <Button x:Name="btnStampa" Content="Stampa" HorizontalAlignment="Left" Margin="120,25,0,0" VerticalAlignment="Top" Width="74" Click="btnStampa_Click" FontWeight="Black"
+                Background="LightGreen"/>
         <ScrollViewer Margin="10,80,70,10">
             <TextBlock x:Name="txtbStampa" TextWrapping="Wrap" />
         </ScrollViewer>
-        <Label x:Name="lblLetteraRotante" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="100" FontWeight="Black" FontSize="26"/>
+        <Label x:Name="lblLetteraRotante" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="49" Width="100" FontWeight="Black" FontSize="30"/>
+        <TextBox x:Name="txtLunghezza" Margin="220,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>
