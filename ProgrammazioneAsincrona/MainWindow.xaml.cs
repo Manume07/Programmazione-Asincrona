@@ -16,26 +16,30 @@ namespace ProgrammazioneAsincrona
     /// </summary>
     public partial class MainWindow : Window
     {
+        string frase;
+        string lettera = "";
         Random rnd = new Random();
-        char[] lettere = new char[26] {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        char[] lettere = new char[26] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
         public MainWindow()
         {
             InitializeComponent();
-            
+            Rolling();
         }
-       private void Rolling()
+        private async Task Rolling()
         {
 
+            while (true)
+            {
+                lettera = lettere[rnd.Next(0, 26)].ToString().ToUpper();
+                lblLetteraRotante.Content = lettera;
+                await Task.Delay(100);
+            }
         }
 
         private void btnStampa_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnScelta_Click(object sender, RoutedEventArgs e)
-        {
-
+            frase = frase + lettera;
+            txtbStampa.Text = frase;
         }
 
     }
